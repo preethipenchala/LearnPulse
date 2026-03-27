@@ -1,0 +1,51 @@
+CREATE TABLE CourseTable (
+    id TEXT NOT NULL PRIMARY KEY,
+    title TEXT NOT NULL,
+    description TEXT NOT NULL,
+    instructorId TEXT NOT NULL,
+    instructorName TEXT NOT NULL,
+    instructorAvatarUrl TEXT NOT NULL,
+    instructorBio TEXT NOT NULL,
+    instructorCourseCount INTEGER NOT NULL DEFAULT 0,
+    instructorRating REAL NOT NULL DEFAULT 0.0,
+    thumbnailUrl TEXT NOT NULL,
+    category TEXT NOT NULL,
+    difficulty TEXT NOT NULL,
+    rating REAL NOT NULL DEFAULT 0.0,
+    enrolledCount INTEGER NOT NULL DEFAULT 0,
+    totalDuration INTEGER NOT NULL DEFAULT 0,
+    price REAL NOT NULL DEFAULT 0.0,
+    isFree INTEGER NOT NULL DEFAULT 0,
+    tags TEXT NOT NULL DEFAULT '',
+    isCached INTEGER NOT NULL DEFAULT 0,
+    cachedAt INTEGER NOT NULL DEFAULT 0
+);
+
+insertOrReplace:
+INSERT OR REPLACE INTO CourseTable(
+    id, title, description, instructorId, instructorName, instructorAvatarUrl,
+    instructorBio, instructorCourseCount, instructorRating, thumbnailUrl, category,
+    difficulty, rating, enrolledCount, totalDuration, price, isFree, tags, isCached, cachedAt
+) VALUES (
+    :id, :title, :description, :instructorId, :instructorName, :instructorAvatarUrl,
+    :instructorBio, :instructorCourseCount, :instructorRating, :thumbnailUrl, :category,
+    :difficulty, :rating, :enrolledCount, :totalDuration, :price, :isFree, :tags, :isCached, :cachedAt
+);
+
+selectAll:
+SELECT * FROM CourseTable WHERE isCached = 1;
+
+selectById:
+SELECT * FROM CourseTable WHERE id = :id;
+
+selectByCategory:
+SELECT * FROM CourseTable WHERE category = :category AND isCached = 1;
+
+searchByTitle:
+SELECT * FROM CourseTable WHERE title LIKE '%' || :query || '%' AND isCached = 1;
+
+deleteAll:
+DELETE FROM CourseTable;
+
+deleteById:
+DELETE FROM CourseTable WHERE id = :id;

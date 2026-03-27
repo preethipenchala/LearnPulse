@@ -1,0 +1,29 @@
+CREATE TABLE NoteTable (
+    id TEXT NOT NULL PRIMARY KEY,
+    userId TEXT NOT NULL,
+    courseId TEXT NOT NULL,
+    lessonId TEXT NOT NULL,
+    content TEXT NOT NULL,
+    timestampSeconds INTEGER NOT NULL DEFAULT 0,
+    createdAt INTEGER NOT NULL,
+    updatedAt INTEGER NOT NULL
+);
+
+insertOrReplace:
+INSERT OR REPLACE INTO NoteTable(
+    id, userId, courseId, lessonId, content, timestampSeconds, createdAt, updatedAt
+) VALUES (
+    :id, :userId, :courseId, :lessonId, :content, :timestampSeconds, :createdAt, :updatedAt
+);
+
+selectByUser:
+SELECT * FROM NoteTable WHERE userId = :userId ORDER BY updatedAt DESC;
+
+selectByLesson:
+SELECT * FROM NoteTable WHERE userId = :userId AND lessonId = :lessonId ORDER BY updatedAt DESC;
+
+searchNotes:
+SELECT * FROM NoteTable WHERE userId = :userId AND content LIKE '%' || :query || '%';
+
+deleteById:
+DELETE FROM NoteTable WHERE id = :id;

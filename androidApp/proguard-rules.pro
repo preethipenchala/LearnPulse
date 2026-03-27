@@ -1,0 +1,4 @@
+-keep class com.learnpulse.** { *; }
+-keep class io.ktor.** { *; }
+-keep class app.cash.sqldelight.** { *; }
+-dontwarn io.ktor.**

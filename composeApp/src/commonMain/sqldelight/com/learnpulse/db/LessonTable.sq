@@ -1,0 +1,27 @@
+CREATE TABLE LessonTable (
+    id TEXT NOT NULL PRIMARY KEY,
+    courseId TEXT NOT NULL,
+    title TEXT NOT NULL,
+    type TEXT NOT NULL,
+    duration INTEGER NOT NULL DEFAULT 0,
+    contentUrl TEXT NOT NULL,
+    lessonOrder INTEGER NOT NULL DEFAULT 0,
+    isPreview INTEGER NOT NULL DEFAULT 0,
+    description TEXT NOT NULL DEFAULT ''
+);
+
+insertOrReplace:
+INSERT OR REPLACE INTO LessonTable(
+    id, courseId, title, type, duration, contentUrl, lessonOrder, isPreview, description
+) VALUES (
+    :id, :courseId, :title, :type, :duration, :contentUrl, :lessonOrder, :isPreview, :description
+);
+
+selectByCourseId:
+SELECT * FROM LessonTable WHERE courseId = :courseId ORDER BY lessonOrder ASC;
+
+selectById:
+SELECT * FROM LessonTable WHERE id = :id;
+
+deleteByCourseId:
+DELETE FROM LessonTable WHERE courseId = :courseId;

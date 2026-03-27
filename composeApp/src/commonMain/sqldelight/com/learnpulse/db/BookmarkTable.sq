@@ -1,0 +1,18 @@
+CREATE TABLE BookmarkTable (
+    id TEXT NOT NULL PRIMARY KEY,
+    userId TEXT NOT NULL,
+    courseId TEXT NOT NULL,
+    lessonId TEXT NOT NULL,
+    title TEXT NOT NULL,
+    createdAt INTEGER NOT NULL DEFAULT 0
+);
+
+insertOrReplace:
+INSERT OR REPLACE INTO BookmarkTable(id, userId, courseId, lessonId, title, createdAt)
+VALUES (:id, :userId, :courseId, :lessonId, :title, :createdAt);
+
+selectByUser:
+SELECT * FROM BookmarkTable WHERE userId = :userId ORDER BY createdAt DESC;
+
+deleteById:
+DELETE FROM BookmarkTable WHERE id = :id;
