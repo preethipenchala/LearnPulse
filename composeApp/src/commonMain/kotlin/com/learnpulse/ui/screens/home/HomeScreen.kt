@@ -5,6 +5,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Search
@@ -12,6 +14,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.koinScreenModel
@@ -55,7 +58,7 @@ class HomeScreen : Screen {
                     title = {
                         Column {
                             Text(
-                                text = "Good morning, ${state.userName} 👋",
+                                text = "Hello, ${state.userName} 👋",
                                 style = MaterialTheme.typography.titleMedium
                             )
                             Text(
@@ -100,8 +103,7 @@ private fun HomeContent(
 ) {
     val spacing = LearnPulseTheme.spacing
     LazyColumn(
-        modifier = Modifier.fillMaxSize().padding(paddingValues),
-        contentPadding = PaddingValues(bottom = 80.dp)
+        modifier = Modifier.fillMaxSize().padding(paddingValues)
     ) {
         // Search bar
         item {
@@ -175,7 +177,13 @@ private fun SearchBar(
         leadingIcon = { Icon(Icons.Default.Search, null) },
         modifier = modifier,
         singleLine = true,
-        shape = RoundedCornerShape(12.dp)
+        shape = RoundedCornerShape(12.dp),
+        keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
+        keyboardActions = KeyboardActions(
+            onSearch = {
+                onSearch()
+            }
+        )
     )
 }
 

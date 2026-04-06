@@ -1,5 +1,7 @@
 package com.learnpulse.ui.navigation
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Download
 import androidx.compose.material.icons.filled.Explore
@@ -34,12 +36,7 @@ import com.learnpulse.ui.screens.profile.ProfileScreen
 import com.learnpulse.ui.screens.progress.ProgressScreen
 import cafe.adriel.voyager.navigator.tab.TabOptions
 import androidx.compose.runtime.remember
-
-data class BottomNavItem(
-    val label: String,
-    val selectedIcon: ImageVector,
-    val unselectedIcon: ImageVector
-)
+import androidx.compose.ui.Modifier
 
 object HomeTab : Tab {
     override val options: TabOptions
@@ -140,8 +137,10 @@ fun AppNavigation() {
                     }
                 }
             }
-        ) { _ ->
-            CurrentTab()
+        ) { paddingValues ->
+            Box(modifier = Modifier.padding(paddingValues)){
+                CurrentTab()
+            }
         }
     }
 }

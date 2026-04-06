@@ -48,7 +48,7 @@ class ProgressScreen : Screen {
                 state.error != null -> ErrorState(message = state.error!!, onRetry = { viewModel.onIntent(ProgressIntent.LoadProgress) })
                 else -> LazyColumn(
                     modifier = Modifier.fillMaxSize().padding(paddingValues),
-                    contentPadding = PaddingValues(16.dp, 8.dp, 16.dp, 80.dp),
+                    contentPadding = PaddingValues(16.dp, 8.dp, 16.dp, 8.dp),
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
                     state.stats?.let { stats ->

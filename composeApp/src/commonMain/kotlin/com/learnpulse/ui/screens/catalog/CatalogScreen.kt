@@ -40,7 +40,7 @@ data class CatalogScreen(val initialQuery: String = "") : Screen {
         val viewModel = koinScreenModel<CatalogViewModel>()
         val state by viewModel.state.collectAsState()
 
-        LaunchedEffect(Unit) {
+        LaunchedEffect(initialQuery) {
             if (initialQuery.isNotBlank()) {
                 viewModel.onIntent(CatalogIntent.SearchQueryChanged(initialQuery))
             }
@@ -83,7 +83,7 @@ data class CatalogScreen(val initialQuery: String = "") : Screen {
                         LazyVerticalGrid(
                             columns = GridCells.Fixed(2),
                             modifier = Modifier.fillMaxSize().padding(paddingValues),
-                            contentPadding = PaddingValues(16.dp, 8.dp, 16.dp, 80.dp),
+                            contentPadding = PaddingValues(16.dp, 8.dp, 16.dp, 8.dp),
                             horizontalArrangement = Arrangement.spacedBy(12.dp),
                             verticalArrangement = Arrangement.spacedBy(12.dp)
                         ) {
@@ -97,7 +97,7 @@ data class CatalogScreen(val initialQuery: String = "") : Screen {
                     } else {
                         LazyColumn(
                             modifier = Modifier.fillMaxSize().padding(paddingValues),
-                            contentPadding = PaddingValues(16.dp, 8.dp, 16.dp, 80.dp),
+                            contentPadding = PaddingValues(16.dp, 8.dp, 16.dp, 8.dp),
                             verticalArrangement = Arrangement.spacedBy(12.dp)
                         ) {
                             items(state.courses) { course ->
